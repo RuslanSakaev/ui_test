@@ -2,12 +2,14 @@ package server;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 public class ClientGUI extends JFrame {
     private final JTextArea chatArea;
@@ -29,8 +31,6 @@ public class ClientGUI extends JFrame {
 
         chatHistoryFile = new File("chat_history.txt");
         chatHistory = new ArrayList<>();
-
-        loadChatHistory(); // Вызов метода загрузки истории чата
 
         JPanel topPanel = new JPanel();
         topPanel.setLayout(new GridLayout(2, 2));
@@ -109,6 +109,10 @@ public class ClientGUI extends JFrame {
         setVisible(true);
     }
 
+    public void setServerConnected(boolean isConnected) {
+        serverConnected = isConnected;
+    }
+
     private void showMessage(String message) {
         chatArea.append(message + "\n");
     }
@@ -134,8 +138,9 @@ public class ClientGUI extends JFrame {
                     chatHistory.add(line);
                 }
                 reader.close();
+                showMessage("Loaded chat history from file.");
             } catch (IOException e) {
-                e.printStackTrace();
+                Logger.getLogger(ClientGUI.class.getName()).log(Level.SEVERE, "Error loading chat history", e);
             }
         }
     }
@@ -151,16 +156,13 @@ public class ClientGUI extends JFrame {
             }
             writer.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            Logger.getLogger(ClientGUI.class.getName()).log(Level.SEVERE, "Error saving chat history", e);
         }
-    }
-
-    public void setServerConnected(boolean isConnected) {
-        serverConnected = isConnected;
     }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(ClientGUI::new);
     }
 }
+
 
