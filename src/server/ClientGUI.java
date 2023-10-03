@@ -97,6 +97,7 @@ public class ClientGUI extends JFrame {
                 sendButton.setEnabled(true);
                 showMessage("Пользователь " + usernameField.getText() + " присоединился к чату.");
                 loadChatHistory(); // Загрузка истории чата из файла при успешном подключении
+                updateChatAreaFromHistory(); // Обновление chatArea после загрузки истории
             } else if (!serverConnected) {
                 showMessage("Server is not connected. Please start the server first.");
             }
@@ -159,6 +160,14 @@ public class ClientGUI extends JFrame {
             Logger.getLogger(ClientGUI.class.getName()).log(Level.SEVERE, "Error saving chat history", e);
         }
     }
+
+    private void updateChatAreaFromHistory() {
+        // chatArea.setText(""); // Очистим chatArea перед добавлением сообщений из истории
+        for (String message : chatHistory) {
+            chatArea.append(message + "\n"); // Добавим каждое сообщение из истории
+        }
+    }
+
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(ClientGUI::new);
