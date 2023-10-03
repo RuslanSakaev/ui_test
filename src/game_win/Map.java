@@ -1,3 +1,5 @@
+package game_win;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
