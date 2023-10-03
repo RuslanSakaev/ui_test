@@ -18,8 +18,8 @@ public class ClientGUI extends JFrame {
     private final JButton loginButton;
     private boolean loggedIn = false;
     private boolean serverConnected = false;
-    private File chatHistoryFile;
-    private List<String> chatHistory;
+    private final File chatHistoryFile;
+    private final List<String> chatHistory;
 
     public ClientGUI() {
         setTitle("Chat Client");
@@ -85,22 +85,20 @@ public class ClientGUI extends JFrame {
         add(infoPanel, BorderLayout.CENTER);
         add(inputPanel, BorderLayout.SOUTH);
 
-        loginButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String username = usernameField.getText();
-                char[] passwordChars = passwordField.getPassword();
-                String password = new String(passwordChars);
-                if (serverConnected && !loggedIn && !username.isEmpty() && !password.isEmpty()) {
-                    loggedIn = true;
-                    usernameField.setEditable(false);
-                    passwordField.setEditable(false);
-                    loginButton.setEnabled(false);
-                    sendButton.setEnabled(true);
-                    showMessage("Пользователь " + usernameField.getText() + " присоединился к чату.");
-                } else if (!serverConnected) {
-                    showMessage("Server is not connected. Please start the server first.");
-                }
+        loginButton.addActionListener(e -> {
+            String username = usernameField.getText();
+            char[] passwordChars = passwordField.getPassword();
+            String password = new String(passwordChars);
+            if (serverConnected && !loggedIn && !username.isEmpty() && !password.isEmpty()) {
+                loggedIn = true;
+                usernameField.setEditable(false);
+                passwordField.setEditable(false);
+                loginButton.setEnabled(false);
+                sendButton.setEnabled(true);
+                showMessage("Пользователь " + usernameField.getText() + " присоединился к чату.");
+                loadChatHistory(); // Загрузка истории чата из файла при успешном подключении
+            } else if (!serverConnected) {
+                showMessage("Server is not connected. Please start the server first.");
             }
         });
 
@@ -162,11 +160,7 @@ public class ClientGUI extends JFrame {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new ClientGUI();
-            }
-        });
+        SwingUtilities.invokeLater(ClientGUI::new);
     }
 }
+
