@@ -25,28 +25,27 @@ public class ClientGUI extends JFrame {
 
     public ClientGUI() {
         setTitle("Chat Client");
-        setSize(400, 400);
+        setSize(500, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
         chatHistoryFile = new File("chat_history.txt");
         chatHistory = new ArrayList<>();
-
         JPanel topPanel = new JPanel();
-        topPanel.setLayout(new GridLayout(2, 2));
-
+        topPanel.setLayout(new GridLayout());
         JLabel ipAddressLabel = new JLabel("IP Address:");
         JTextField ipAddressField = new JTextField("127.0.0.1");
         JLabel portLabel = new JLabel("Port:");
         JTextField portField = new JTextField("8189");
-
+        JLabel portLabell = new JLabel();
         topPanel.add(ipAddressLabel);
         topPanel.add(ipAddressField);
         topPanel.add(portLabel);
         topPanel.add(portField);
+        topPanel.add(portLabell);
 
         JPanel loginPanel = new JPanel();
-        loginPanel.setLayout(new GridLayout(3, 1));
+        loginPanel.setLayout(new GridLayout());
 
         JLabel usernameLabel = new JLabel("Username:");
         usernameField = new JTextField();
@@ -167,7 +166,7 @@ public class ClientGUI extends JFrame {
             chatArea.append(message + "\n"); // Добавим каждое сообщение из истории
         }
     }
-
+    //TODO поправить
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(ClientGUI::new);
