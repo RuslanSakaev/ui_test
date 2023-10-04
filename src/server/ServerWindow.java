@@ -10,8 +10,8 @@ public class ServerWindow extends JFrame {
     private ServerSocket serverSocket;
     private boolean isServerRunning = false;
 
-    public ServerWindow(ClientGUI clientGUI) { // Передайте экземпляр ClientGUI в конструктор
-        // Добавьте поле для хранения экземпляра ClientGUI
+    public ServerWindow(ClientGUI clientGUI) {
+
 
         setTitle("Server Window");
         setSize(400, 300);
@@ -32,16 +32,16 @@ public class ServerWindow extends JFrame {
 
         startButton.addActionListener(e -> {
             if (!isServerRunning) {
-                int port = 8189; // Порт, который вы хотите слушать
+                int port = 8189; // Порт, который слушаем
                 try {
                     serverSocket = new ServerSocket(port);
                     logTextArea.append("Server started on port " + port + "\n");
                     isServerRunning = true;
 
-                    // Уведомьте ClientGUI о подключении к серверу
+                    // Уведомление ClientGUI о подключении к серверу
                     clientGUI.setServerConnected(true);
 
-                    // В этом месте можно начать принимать клиентские подключения
+                    // В этом месте начинаем принимать клиентские подключения
                 } catch (IOException ex) {
                     logTextArea.append("Error starting server: " + ex.getMessage() + "\n");
                 }
@@ -57,7 +57,7 @@ public class ServerWindow extends JFrame {
                     logTextArea.append("Server stopped\n");
                     isServerRunning = false;
 
-                    // Уведомьте ClientGUI о отключении от сервера
+                    // Уведомление ClientGUI об отключении от сервера
                     clientGUI.setServerConnected(false);
                 } catch (IOException ex) {
                     logTextArea.append("Error stopping server: " + ex.getMessage() + "\n");
