@@ -31,18 +31,7 @@ public class ClientGUI extends JFrame {
 
         chatHistoryFile = new File("chat_history.txt");
         chatHistory = new ArrayList<>();
-        JPanel topPanel = new JPanel();
-        topPanel.setLayout(new GridLayout());
-        JLabel ipAddressLabel = new JLabel("IP Address:");
-        JTextField ipAddressField = new JTextField("127.0.0.1");
-        JLabel portLabel = new JLabel("Port:");
-        JTextField portField = new JTextField("8189");
-        JLabel portLabell = new JLabel();
-        topPanel.add(ipAddressLabel);
-        topPanel.add(ipAddressField);
-        topPanel.add(portLabel);
-        topPanel.add(portField);
-        topPanel.add(portLabell);
+        JPanel topPanel = getjPanel();
 
         JPanel loginPanel = new JPanel();
         loginPanel.setLayout(new GridLayout());
@@ -107,6 +96,22 @@ public class ClientGUI extends JFrame {
         sendButton.addActionListener(e -> sendMessage());
 
         setVisible(true);
+    }
+
+    private static JPanel getjPanel() {
+        JPanel topPanel = new JPanel();
+        topPanel.setLayout(new GridLayout());
+        JLabel ipAddressLabel = new JLabel("IP Address:");
+        JTextField ipAddressField = new JTextField("127.0.0.1");
+        JLabel portLabel = new JLabel("Port:");
+        JTextField portField = new JTextField("8189");
+        JLabel portLabell = new JLabel();
+        topPanel.add(ipAddressLabel);
+        topPanel.add(ipAddressField);
+        topPanel.add(portLabel);
+        topPanel.add(portField);
+        topPanel.add(portLabell);
+        return topPanel;
     }
 
     public void setServerConnected(boolean isConnected) {
