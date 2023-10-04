@@ -86,6 +86,7 @@ public class ClientGUI extends JFrame {
                 showMessage("Пользователь " + usernameField.getText() + " присоединился к чату.");
                 loadChatHistory(); // Загрузка истории чата из файла при успешном подключении
                 updateChatAreaFromHistory(); // Обновление chatArea после загрузки истории
+                topPanel.setVisible(false);
             } else if (!serverConnected) {
                 showMessage("Server is not connected. Please start the server first.");
             }
