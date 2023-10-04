@@ -25,7 +25,7 @@ public class ClientGUI extends JFrame {
 
     public ClientGUI() {
         setTitle("Chat Client");
-        setSize(500, 400);
+        setSize(400, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -131,6 +131,7 @@ public class ClientGUI extends JFrame {
             saveChatHistory(); // Сохранение истории чата в файл
         }
     }
+
 
     private void loadChatHistory() {
         if (chatHistoryFile.exists()) {
